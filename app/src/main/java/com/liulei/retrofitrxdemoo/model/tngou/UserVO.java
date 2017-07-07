@@ -65,4 +65,16 @@ public class UserVO implements Serializable {
     public void setUser_id(int user_id) {
         this.user_id = user_id;
     }
+
+    @Override
+    public String toString() {
+        return "UserVO{" +
+                "user_mobile='" + user_mobile + '\'' +
+                ", user_name='" + user_name + '\'' +
+                ", user_token='" + user_token + '\'' +
+                ", complete_info='" + complete_info + '\'' +
+                ", user_id=" + user_id +
+                ", user_header='" + user_header + '\'' +
+                '}';
+    }
 }

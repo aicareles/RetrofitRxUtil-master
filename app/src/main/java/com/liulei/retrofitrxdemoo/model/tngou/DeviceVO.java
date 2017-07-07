@@ -156,4 +156,27 @@ public class DeviceVO implements Serializable {
     public void setMember_id(String member_id) {
         this.member_id = member_id;
     }
+
+    @Override
+    public String toString() {
+        return "DeviceVO{" +
+                "client_id='" + client_id + '\'' +
+                ", device_brand='" + device_brand + '\'' +
+                ", device_id=" + device_id +
+                ", device_model='" + device_model + '\'' +
+                ", device_name='" + device_name + '\'' +
+                ", device_platform='" + device_platform + '\'' +
+                ", device_version='" + device_version + '\'' +
+                ", live_id='" + live_id + '\'' +
+                ", user_id=" + user_id +
+                ", online='" + online + '\'' +
+                ", is_admin=" + is_admin +
+                ", member_name='" + member_name + '\'' +
+                ", photo_enable=" + photo_enable +
+                ", video_enable=" + video_enable +
+                ", control_enable=" + control_enable +
+                ", member_id='" + member_id + '\'' +
+                ", device_header='" + device_header + '\'' +
+                '}';
+    }
 }

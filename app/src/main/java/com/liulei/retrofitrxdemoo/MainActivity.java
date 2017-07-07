@@ -8,9 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.daimajia.numberprogressbar.NumberProgressBar;
-import com.liulei.retrofitrxdemoo.consts.Consts;
 import com.liulei.retrofitrxdemoo.model.BaseResponse;
-import com.liulei.retrofitrxdemoo.model.UserModel;
 import com.liulei.retrofitrxdemoo.model.tngou.Cook;
 import com.liulei.retrofitrxdemoo.model.tngou.DeviceVO;
 import com.liulei.retrofitrxdemoo.model.tngou.TngouResponse;
@@ -26,13 +24,7 @@ import java.util.List;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
-import rx.Observable;
 import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -106,12 +98,16 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this,user,Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
     public void btnListClick(View view) {
         HashMap<String,String> map = new HashMap<>();
         if(token!=null){
             map.put("token",token);
+        }else {
+            Toast.makeText(MainActivity.this,"token为空，请先点击获取bean的Retrofit的按钮进行登录并获取token",Toast.LENGTH_SHORT).show();
+            return;
         }
         RetrofitUtil.getInstance().MyDevices(map,new Subscriber<BaseResponse<List<DeviceVO>>>() {
             @Override
@@ -128,7 +124,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onNext(BaseResponse<List<DeviceVO>> deviceVOBaseResponse) {
                 String devices = deviceVOBaseResponse.data.toString();
-
                 Toast.makeText(MainActivity.this,devices,Toast.LENGTH_SHORT).show();
             }
         });
@@ -204,45 +199,22 @@ public class MainActivity extends AppCompatActivity {
      *
      * @param view
      */
-    public void btnClick1(View view) {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Consts.APP_HOST)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .build();
-        ApiService apiService = retrofit.create(ApiService.class);
-        Observable<BaseResponse<List<UserModel>>> observable = apiService.getUsersByRx();
-        observable
-                .subscribeOn(Schedulers.io())  // 网络请求切换在io线程中调用
-                .unsubscribeOn(Schedulers.io())// 取消网络请求放在io线程
-                .observeOn(AndroidSchedulers.mainThread())// 观察后放在主线程调用
-                .subscribe(new Subscriber<BaseResponse<List<UserModel>>>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        showToast("rx失败:" + e.getMessage());
-                        Log.e(TAG, "rx失败:" + e.getMessage());
-                        mTextView.setText("rx失败:" + e.getMessage());
-                    }
-
-                    @Override
-                    public void onNext(BaseResponse<List<UserModel>> listBaseResponse) {
-                        showToast("rx成功:" + listBaseResponse.data.toString());
-                        mTextView.setText("rx成功:" + listBaseResponse.data.toString());
-                        Log.e(TAG, "rx成功:" + listBaseResponse.data.toString());
-                    }
-                });
-    }
 
 
     private SubscriberOnNextListener mListener;
 
     public void btnProgressClick(View view) {
 
-        RetrofitUtil.getInstance().getCookList(2,5,new ProgressSubscriber<TngouResponse<List<Cook>>>(mListener,this));
+        //模拟耗时2s   以便显示出加载框
+        HashMap<String,String>map = new HashMap<>();
+        map.put("mobile","18682176281");
+        RetrofitUtil.getInstance().verfcationNum(map,new ProgressSubscriber<BaseResponse>(new SubscriberOnNextListener<BaseResponse>() {
+                    @Override
+                    public void onNext(BaseResponse baseResponse) {
+                        Toast.makeText(MainActivity.this,"验证手机号成功",Toast.LENGTH_SHORT).show();
+                    }
+                },this));
+
+//        RetrofitUtil.getInstance().getCookList(2,5,new ProgressSubscriber<TngouResponse<List<Cook>>>(mListener,this));
     }
 }

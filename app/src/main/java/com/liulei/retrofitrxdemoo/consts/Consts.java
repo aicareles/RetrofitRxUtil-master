@@ -18,4 +18,6 @@ public final class Consts {
 //    public final static String APP_HOST = "http://www.tngou.net/";http://media.e-toys.cn/
     public final static String APP_HOST = "http://media.e-toys.cn/";
 
+//    public final static String APP_HOST = "http://fan.e-toys.cn/";
+
 }

@@ -62,26 +62,6 @@ public class RetrofitUtil {
         return mInstance;
     }
 
-//    /**
-//     * 用于获取用户信息
-//     * @param subscriber
-//     */
-//    public void getUsers(Subscriber<BaseResponse<List<UserModel>>> subscriber){
-//        mApiService.getUsersByRx()
-//                .subscribeOn(Schedulers.io())
-//                .unsubscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(subscriber);
-//    }
-//
-//    public void getUsersByMore(Subscriber<BaseResponse<? extends Object>> subscriber){
-//        mApiService.getUsersByRx()
-//                .subscribeOn(Schedulers.io())
-//                .unsubscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(subscriber);
-//    }
-
     /**
      *
      * @param page  请求页数，默认page=1

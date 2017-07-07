@@ -54,6 +54,7 @@ public interface ApiService {
     @POST("api/user/loginByMobile")
     Observable<BaseResponse<UserVO>> getUser(@FieldMap Map<String, String> map);
 
+
     //POST请求
     @FormUrlEncoded
     @POST("api/user/devices")

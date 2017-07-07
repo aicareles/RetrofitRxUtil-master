@@ -16,14 +16,14 @@
         android:id="@+id/simple"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="简单的Retrofit"
+        android:text="简单的Retrofit(验证手机是否注册)"
         android:onClick="btnSimpleClick"/>
 
     <Button
         android:id="@+id/bean"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="获取bean的Retrofit"
+        android:text="获取bean的Retrofit（登录获取User对象）"
         android:onClick="btnBeanClick"/>
 
     <Button
@@ -39,14 +39,6 @@
         android:layout_height="wrap_content"
         android:text="上传头像的Retrofit"
         android:onClick="btnUploadClick"/>
-
-
-    <Button
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="rx+retrofit获取"
-        android:onClick="btnClick1"/>
 
         <View
             android:layout_marginTop="5dp"
